@@ -9,7 +9,7 @@
 As a RIG user, I want to:
 
 - Provide an **overall theme / generic idea** for my website.
-- Provide **three TLDs** in **preference order** (most desirable → least), e.g. `[".com", ".de", ".io"]`.
+- Provide **one to three TLDs** in **preference order** (most desirable → least), e.g. `.com, .de, .io`.
 - Have the **RIG check domain availability** for candidate names derived from the theme and the preferred TLDs.
 - Have the RIG return the **best available domain** (or the best “maybe available” choice if certainty isn’t possible).
 
@@ -56,7 +56,7 @@ Non-goals (v0.1):
 - Output: JSON list of candidate SLDs (second-level domains), e.g. `"pixelforge"`, `"tinyarcade"`
 
 **TS1 — Domain availability check (Tool Step, Python)**
-- Input: JSON (candidate SLDs × 3 TLDs)
+- Input: JSON (candidate SLDs × 1..3 TLDs)
 - Output: JSON results with per-domain status and evidence
 
 **MS2 — Select best (Model Step)**
@@ -131,7 +131,7 @@ Example:
 ### 6.2 TS1 input schema — `ts1_check_domains_in.schema.json`
 
 **Fields**
-- `tlds`: exactly 3 strings, each beginning with dot
+- `tlds`: 1 to 3 strings, each beginning with dot
 - `slds`: list from MS1
 - `options`:
   - `timeout_ms` (default 2500)
@@ -380,4 +380,3 @@ If validation fails at any step:
 - Best: `pixelforge.de`
 - Ranked list: all checked domains with status + confidence
 - Next actions: suggestions if no `available` found (e.g., add prefix/suffix)
-

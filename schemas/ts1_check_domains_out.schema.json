@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TS1 Check Domains Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["checked_at", "results"],
+  "properties": {
+    "checked_at": {"type": "string", "format": "date-time"},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "status", "confidence", "method"],
+        "properties": {
+          "domain": {"type": "string", "minLength": 3},
+          "status": {"type": "string", "enum": ["available", "taken", "unknown", "invalid"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "method": {"type": "string", "enum": ["rdap", "dns", "rdap+dns"]},
+          "rdap_server": {"type": ["string", "null"]},
+          "rdap_http": {"type": ["integer", "null"]},
+          "dns_nxdomain": {"type": ["boolean", "null"]},
+          "dns_ns": {"type": ["boolean", "null"]},
+          "dns_soa": {"type": ["boolean", "null"]},
+          "error": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "suggested_best": {"type": ["string", "null"]}
+  }
+}

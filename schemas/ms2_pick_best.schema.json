@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MS2 Pick Best",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["best_domain", "rationale", "ranked"],
+  "properties": {
+    "best_domain": {"type": ["string", "null"]},
+    "rationale": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "ranked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "status", "confidence"],
+        "properties": {
+          "domain": {"type": "string"},
+          "status": {"type": "string", "enum": ["available", "taken", "unknown", "invalid"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "tld_preference_rank": {"type": "integer", "minimum": 0},
+          "summary": {"type": "string"}
+        }
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

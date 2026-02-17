@@ -1,0 +1,15 @@
+name: domainscout
+version: 0.1.0
+unknown_fallback_default: true
+steps:
+  - id: ms1_generate_slds
+    type: model
+    schema_out: schemas/ms1_generate_slds.schema.json
+  - id: ts1_check_domains
+    type: tool
+    schema_in: schemas/ts1_check_domains_in.schema.json
+    schema_out: schemas/ts1_check_domains_out.schema.json
+    command: uv run domainscout-check
+  - id: ms2_pick_best
+    type: model
+    schema_out: schemas/ms2_pick_best.schema.json

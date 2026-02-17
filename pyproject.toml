@@ -1,0 +1,37 @@
+[project]
+name = "rig-domainscout"
+version = "0.1.0"
+description = "RIG v0.1 DomainScout MVP"
+readme = "rig.md"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.27.0",
+  "dnspython>=2.6.1",
+  "pydantic>=2.8.0",
+  "jsonschema>=4.23.0",
+  "PyYAML>=6.0.2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.2",
+  "pytest-asyncio>=0.24.0",
+]
+
+[project.scripts]
+domainscout-check = "domainscout_check.cli:main"
+domainscout-run = "domainscout.run:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src", "tools/check_domains/src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tools/check_domains/src"]
+testpaths = ["tests"]
